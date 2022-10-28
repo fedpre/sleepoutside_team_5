@@ -90,6 +90,12 @@ button {
   border: 0;
   font-size: var(--large-font);
 }
+button:hover {
+  background-color: #434a0c;
+}
+button:active {
+  transform: scale(0.97);
+}
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
