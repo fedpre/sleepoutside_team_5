@@ -11,7 +11,6 @@ function convertToJson(res) {
     throw new Error('Bad Response')
   }
 }
-
 function getProductsData() {
   fetch('../json/tents.json')
     .then(convertToJson)
@@ -24,7 +23,6 @@ function getProductsData() {
 function renderProductPage() {
   const id = getLocalStorage('currPageId')
   const product = productsArray.find(item => item.Id === id)
-  console.log(product)
   const newProduct = `<h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.Name}</h2>
         <img
@@ -41,6 +39,7 @@ function renderProductPage() {
         </div>`
 
   document.querySelector('.product-detail').innerHTML = newProduct
+  document.querySelector('title').innerHTML = `Sleep Outside | ${product.Name}`
   return newProduct
 }
 
