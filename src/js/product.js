@@ -42,6 +42,16 @@ function addToCart(e) {
   }
 }
 
-getProductsData()
-// add listener to Add to Cart button
-document.getElementById('addToCart').addEventListener('click', addToCart)
+const section = document.querySelector('.product-detail')
+
+const domMutation = function (mutations) {
+  mutations.forEach(function (mutation) {
+    getProductsData()
+    // add listener to Add to Cart button
+    document.getElementById('addToCart').addEventListener('click', addToCart)
+  })
+}
+// Use the MutationObserver to detect changes in the DOM
+const observer = new MutationObserver(domMutation)
+// Observe changes in the section of the product-template.html
+observer.observe(section, { childList: true })
