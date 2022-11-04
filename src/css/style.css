@@ -1,6 +1,6 @@
 :root {
   --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -89,12 +89,6 @@ button {
   display: block;
   border: 0;
   font-size: var(--large-font);
-}
-button:hover {
-  background-color: #434a0c;
-}
-button:active {
-  transform: scale(0.97);
 }
 .divider {
   border-bottom: 2px solid var(--primary-color);
