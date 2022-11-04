@@ -1,6 +1,4 @@
-function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key))
-}
+import { getLocalStorage, setLocalStorage } from './utils'
 
 function getCartContents() {
   const cartItems = getLocalStorage('so-cart')
@@ -23,6 +21,7 @@ function renderCartItem(item) {
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
+   <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
@@ -30,4 +29,23 @@ function renderCartItem(item) {
   return newItem
 }
 
+function removeItem(e) {
+  e.preventDefault()
+  const id = e.target.dataset.id
+  if (getLocalStorage('so-cart') !== null) {
+    const items = getLocalStorage('so-cart')
+    //  const item = items.filter(i => i.Id === id)
+    console.log(items)
+    const newItems = items.filter(item => item.Id !== id)
+    setLocalStorage('so-cart', newItems)
+    window.location.reload()
+  }
+}
+
 getCartContents()
+const cartItems = getLocalStorage('so-cart')
+if (cartItems !== null) {
+  const listeners = document.querySelectorAll('.cart-card__delete')
+  const listenersArray = Array.from(listeners)
+  listenersArray.map(listener => listener.addEventListener('click', removeItem))
+}
