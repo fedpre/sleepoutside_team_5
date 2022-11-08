@@ -6,8 +6,6 @@ let id2 = document.getElementById('985RF').id
 let id3 = document.getElementById('344YJ').id
 let id4 = document.getElementById('985PR').id
 
-console.log(id1, id2, id3, id4)
-
 document
   .getElementById(id1)
   .addEventListener('click', () => setLocalStorage('currPageId', id1))

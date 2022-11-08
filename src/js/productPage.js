@@ -1,5 +1,4 @@
 // data_id of button
-console.log()
 // price, product, description, image
 import { getLocalStorage } from './utils.js'
 //build array
