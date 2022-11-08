@@ -1,11 +1,11 @@
 import { getLocalStorage, setLocalStorage } from './utils'
 
 function getCartContents() {
-  const cartItems = getLocalStorage('so-cart')
-  if (cartItems == null) {
+  const cartItem = getLocalStorage('so-cart')
+  if (cartItem == null) {
     return
   }
-  const htmlItems = cartItems.map(item => renderCartItem(item))
+  const htmlItems = cartItem.map(item => renderCartItem(item))
   document.querySelector('.product-list').innerHTML = htmlItems.join('')
   // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
 }
