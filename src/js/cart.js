@@ -1,26 +1,12 @@
 import { getLocalStorage, setLocalStorage } from './utils'
-let itemQt = []
 
 function getCartContents() {
   const cartItem = getLocalStorage('so-cart')
   if (cartItem == null) {
     return
   }
-  const noDuplCart = []
-  cartItem.map(item => {
-    let id = item.Id
-    if (!noDuplCart.includes(id)) {
-      noDuplCart.push(id)
-    }
-  })
-
-  const renderItems = noDuplCart.map(id => {
-    const qt = cartItem.filter(i => i.Id === id).length
-    const item = cartItem.find(el => el.Id === id)
-    itemQt.push({ item: item.Id, quantity: qt || 1 })
-    return renderCartItem(item, itemQt.at(-1).quantity)
-  })
-  console.log(itemQt)
+  console.log(cartItem)
+  const renderItems = cartItem.map(item => renderCartItem(item))
 
   document.querySelector('.product-list').innerHTML = renderItems.join('')
 }
@@ -29,7 +15,7 @@ function countItems(list, id) {
   return list.filter(item => item.Id === id).length
 }
 
-function renderCartItem(item, quantity) {
+function renderCartItem(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -42,7 +28,7 @@ function renderCartItem(item, quantity) {
   </a>
    <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: <span class="qt-num">${quantity}</span></p>
+  <p class="cart-card__quantity">qty: <span class="qt-num">${item.quantity}</span></p>
 <button data-id=${item.Id} class="cart-card__addQuantity">+</button>
 <button data-id=${item.Id} class="cart-card__removeQuantity">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
@@ -61,25 +47,9 @@ function removeItem(e) {
   }
 }
 
-function addQuantity(e) {
-  const quantity = document.querySelector('.qt-num')
-  const newQt = parseInt(quantity.innerHTML) + 1
-  quantity.innerHTML = newQt
+function addQuantity(e) {}
 
-  const newItem = { item: e.target.dataset.id, quantity: newQt }
-  let newItemQt = itemQt.filter(f => f.item !== e.target.dataset.id)
-  newItemQt = [...newItemQt, newItem]
-}
-
-function removeQuantity(e) {
-  const quantity = document.querySelector('.qt-num')
-  const newQt = parseInt(quantity.innerHTML) - 1
-  quantity.innerHTML = newQt
-
-  const newItem = { item: e.target.dataset.id, quantity: newQt }
-  let newItemQt = itemQt.filter(f => f.item !== e.target.dataset.id)
-  newItemQt = [...newItemQt, newItem]
-}
+function removeQuantity(e) {}
 
 getCartContents()
 const cartItems = getLocalStorage('so-cart')
