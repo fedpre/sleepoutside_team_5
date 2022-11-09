@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from './utils'
-const itemQt = []
+let itemQt = []
 
 function getCartContents() {
   const cartItem = getLocalStorage('so-cart')
@@ -43,8 +43,8 @@ function renderCartItem(item, quantity) {
    <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: <span class="qt-num">${quantity}</span></p>
-<button dataset=${item.Id} class="cart-card__addQuantity">+</button>
-<button dataset=${item.Id} class="cart-card__removeQuantity">-</button>
+<button data-id=${item.Id} class="cart-card__addQuantity">+</button>
+<button data-id=${item.Id} class="cart-card__removeQuantity">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`
   return newItem
@@ -65,19 +65,20 @@ function addQuantity(e) {
   const quantity = document.querySelector('.qt-num')
   const newQt = parseInt(quantity.innerHTML) + 1
   quantity.innerHTML = newQt
-  itemQt.map(item => {
-    console.log(e.target.dataset)
-    if (item.Id === e.target.dataset) {
-      ;[...itemQt, { ...item, quantity: quantity + 1 }]
-    }
-  })
-  console.log(itemQt)
+
+  const newItem = { item: e.target.dataset.id, quantity: newQt }
+  let newItemQt = itemQt.filter(f => f.item !== e.target.dataset.id)
+  newItemQt = [...newItemQt, newItem]
 }
 
 function removeQuantity(e) {
   const quantity = document.querySelector('.qt-num')
   const newQt = parseInt(quantity.innerHTML) - 1
   quantity.innerHTML = newQt
+
+  const newItem = { item: e.target.dataset.id, quantity: newQt }
+  let newItemQt = itemQt.filter(f => f.item !== e.target.dataset.id)
+  newItemQt = [...newItemQt, newItem]
 }
 
 getCartContents()
