@@ -24,10 +24,12 @@ export default class ProductDetails {
     const localItems = getLocalStorage('so-cart')
     // Check if there are already items there and add the new item
     if (localItems === null) {
-      setLocalStorage('so-cart', [this.product])
-    } else {
-      setLocalStorage('so-cart', [...localItems, this.product])
+      setLocalStorage('so-cart', [{ ...this.product, quantity: 1 }])
+      return
     }
+    const itemAlreadySaved = localItems.filter(i => this.product.Id === i.Id)
+    console.log(itemAlreadySaved)
+    setLocalStorage('so-cart', [...localItems, this.product])
   }
 
   renderProductDetails() {
