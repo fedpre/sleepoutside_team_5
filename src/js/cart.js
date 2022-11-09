@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from './utils'
+const itemQt = []
 
 function getCartContents() {
   const cartItem = getLocalStorage('so-cart')
@@ -16,8 +17,10 @@ function getCartContents() {
   const renderItems = noDuplCart.map(id => {
     const qt = cartItem.filter(i => i.Id === id).length
     const item = cartItem.find(el => el.Id === id)
-    return renderCartItem(item, qt)
+    itemQt.push({ item: item.Id, quantity: qt || 1 })
+    return renderCartItem(item, itemQt.at(-1).quantity)
   })
+  console.log(itemQt)
 
   document.querySelector('.product-list').innerHTML = renderItems.join('')
 }
@@ -40,8 +43,8 @@ function renderCartItem(item, quantity) {
    <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: <span class="qt-num">${quantity}</span></p>
-<button class="cart-card__addQuantity">+</button>
-<button class="cart-card__removeQuantity">-</button>
+<button dataset=${item.Id} class="cart-card__addQuantity">+</button>
+<button dataset=${item.Id} class="cart-card__removeQuantity">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`
   return newItem
@@ -62,6 +65,13 @@ function addQuantity(e) {
   const quantity = document.querySelector('.qt-num')
   const newQt = parseInt(quantity.innerHTML) + 1
   quantity.innerHTML = newQt
+  itemQt.map(item => {
+    console.log(e.target.dataset)
+    if (item.Id === e.target.dataset) {
+      ;[...itemQt, { ...item, quantity: quantity + 1 }]
+    }
+  })
+  console.log(itemQt)
 }
 
 function removeQuantity(e) {
