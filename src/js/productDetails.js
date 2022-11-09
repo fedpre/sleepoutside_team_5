@@ -30,7 +30,7 @@ export default class ProductDetails {
     const addItemsArray = localItems.map(item =>
       item.Id === this.product.Id
         ? { ...item, quantity: item.quantity + 1 }
-        : item
+        : { ...this.product, quantity: 1 }
     )
     console.log(addItemsArray)
     setLocalStorage('so-cart', addItemsArray)
