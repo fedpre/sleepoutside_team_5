@@ -5,14 +5,9 @@ function getCartContents() {
   if (cartItem == null) {
     return
   }
-  console.log(cartItem)
   const renderItems = cartItem.map(item => renderCartItem(item))
 
   document.querySelector('.product-list').innerHTML = renderItems.join('')
-}
-
-function countItems(list, id) {
-  return list.filter(item => item.Id === id).length
 }
 
 function renderCartItem(item) {
@@ -47,9 +42,25 @@ function removeItem(e) {
   }
 }
 
-function addQuantity(e) {}
+function addQuantity(e) {
+  const id = e.target.dataset.id
+  const currItems = getLocalStorage('so-cart')
+  const addItemsArray = currItems.map(item =>
+    item.Id === id ? { ...item, quantity: item.quantity + 1 } : item
+  )
+  setLocalStorage('so-cart', addItemsArray)
+  window.location.reload()
+}
 
-function removeQuantity(e) {}
+function removeQuantity(e) {
+  const id = e.target.dataset.id
+  const currItems = getLocalStorage('so-cart')
+  const addItemsArray = currItems.map(item =>
+    item.Id === id ? { ...item, quantity: item.quantity - 1 } : item
+  )
+  setLocalStorage('so-cart', addItemsArray)
+  window.location.reload()
+}
 
 getCartContents()
 const cartItems = getLocalStorage('so-cart')
