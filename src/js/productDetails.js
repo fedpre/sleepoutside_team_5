@@ -21,19 +21,28 @@ export default class ProductDetails {
 
   async addToCart() {
     // Get the current items stores in localStorage
-    const localItems = getLocalStorage('so-cart')
+    let localItems = getLocalStorage('so-cart')
     // Check if there are already items there and add the new item
     if (localItems === null || localItems.length === 0) {
+      console.log('here in the first')
       setLocalStorage('so-cart', [{ ...this.product, quantity: 1 }])
       return
     }
     const addItemsArray = localItems.map(item =>
       item.Id === this.product.Id
         ? { ...item, quantity: item.quantity + 1 }
-        : { ...this.product, quantity: 1 }
+        : item
     )
-    console.log(addItemsArray)
-    setLocalStorage('so-cart', addItemsArray)
+    let check = localItems.find(i => i.Id === this.product.Id)
+
+    if (check !== undefined) {
+      setLocalStorage('so-cart', addItemsArray)
+    } else {
+      setLocalStorage('so-cart', [
+        ...localItems,
+        { ...this.product, quantity: 1 }
+      ])
+    }
   }
 
   renderProductDetails() {
