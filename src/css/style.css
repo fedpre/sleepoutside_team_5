@@ -81,7 +81,7 @@ header {
   color: var(--tertiary-color);
 }
 
-button {
+.btn-primary {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -90,12 +90,25 @@ button {
   border: 0;
   font-size: var(--large-font);
 }
-button:hover {
+.btn-primary:hover {
   background-color: #434a0c;
 }
-button:active {
+.btn-primary:active {
   transform: scale(0.97);
 }
+
+.btn-secondary {
+  border: 0;
+  padding: 3px 0;
+  font-size: var(--large-font);
+  width: 50px;
+  margin: auto;
+  border-radius: 10px;
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }

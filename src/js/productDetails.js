@@ -57,7 +57,7 @@ export default class ProductDetails {
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
-          <button id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
+          <button class="btn-primary" id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
         </div>`
 
     document.querySelector('.product-detail').innerHTML = newProduct
