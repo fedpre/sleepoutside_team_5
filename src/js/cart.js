@@ -5,9 +5,9 @@ function getCartContents() {
   if (cartItem == null) {
     return
   }
-  const htmlItems = cartItem.map(item => renderCartItem(item))
-  document.querySelector('.product-list').innerHTML = htmlItems.join('')
-  // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
+  const renderItems = cartItem.map(item => renderCartItem(item))
+
+  document.querySelector('.product-list').innerHTML = renderItems.join('')
 }
 
 function renderCartItem(item) {
@@ -23,7 +23,9 @@ function renderCartItem(item) {
   </a>
    <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">qty: <span class="qt-num">${item.quantity}</span></p>
+<button data-id=${item.Id} class="cart-card__addQuantity btn-secondary">+</button>
+<button data-id=${item.Id} class="cart-card__removeQuantity btn-secondary">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`
   return newItem
@@ -34,18 +36,54 @@ function removeItem(e) {
   const id = e.target.dataset.id
   if (getLocalStorage('so-cart') !== null) {
     const items = getLocalStorage('so-cart')
-    //  const item = items.filter(i => i.Id === id)
-    console.log(items)
     const newItems = items.filter(item => item.Id !== id)
     setLocalStorage('so-cart', newItems)
     window.location.reload()
   }
 }
 
+function addQuantity(e) {
+  const id = e.target.dataset.id
+  const currItems = getLocalStorage('so-cart')
+  const addItemsArray = currItems.map(item =>
+    item.Id === id ? { ...item, quantity: item.quantity + 1 } : item
+  )
+  setLocalStorage('so-cart', addItemsArray)
+  window.location.reload()
+}
+
+function removeQuantity(e) {
+  const id = e.target.dataset.id
+  const currItems = getLocalStorage('so-cart')
+  const addItemsArray = currItems.map(item =>
+    item.Id === id ? { ...item, quantity: item.quantity - 1 } : item
+  )
+  setLocalStorage('so-cart', addItemsArray)
+  window.location.reload()
+}
+
 getCartContents()
 const cartItems = getLocalStorage('so-cart')
 if (cartItems !== null) {
-  const listeners = document.querySelectorAll('.cart-card__delete')
-  const listenersArray = Array.from(listeners)
-  listenersArray.map(listener => listener.addEventListener('click', removeItem))
+  const deleteListeners = document.querySelectorAll('.cart-card__delete')
+  const deleteListenersArray = Array.from(deleteListeners)
+  deleteListenersArray.map(listener =>
+    listener.addEventListener('click', removeItem)
+  )
+
+  // Listeners for add buttons
+  const addListeners = document.querySelectorAll('.cart-card__addQuantity')
+  const addListenersArray = Array.from(addListeners)
+  addListenersArray.map(listener =>
+    listener.addEventListener('click', addQuantity)
+  )
+
+  // Listeners for remove buttons
+  const removeListeners = document.querySelectorAll(
+    '.cart-card__removeQuantity'
+  )
+  const removeListenersArray = Array.from(removeListeners)
+  removeListenersArray.map(listener =>
+    listener.addEventListener('click', removeQuantity)
+  )
 }

@@ -1,0 +1,64 @@
+import { getLocalStorage, setLocalStorage } from './utils'
+
+function getCartContents() {
+  const cartItem = getLocalStorage('so-cart')
+  console.log(cartItem)
+  if (cartItem == null) {
+    return
+  }
+  console.log(countItems(cartItem, '880RR'))
+  const htmlItems = cartItem.map(item => {
+    if (countItems(cartItem, item.Id) > 1) {
+      const newItem = { ...item, Quantity: countItems(cartItem, item.Id) }
+      return renderCartItem(newItem)
+    }
+
+    return renderCartItem({ ...item, Quantity: 1 })
+  })
+
+  document.querySelector('.product-list').innerHTML = htmlItems.join('')
+}
+
+function countItems(list, id) {
+  return list.filter(item => item.Id === id).length
+}
+
+function renderCartItem(item) {
+  const newItem = `<li class="cart-card divider">
+  <a href="#" class="cart-card__image">
+    <img
+      src="${item.Image}"
+      alt="${item.Name}"
+    />
+  </a>
+  <a href="#">
+    <h2 class="card__name">${item.Name}</h2>
+  </a>
+   <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
+  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__quantity">qty: ${item.Quantity}</p>
+  <p class="cart-card__price">$${item.FinalPrice}</p>
+</li>`
+  return newItem
+}
+
+function removeItem(e) {
+  e.preventDefault()
+  const id = e.target.dataset.id
+  if (getLocalStorage('so-cart') !== null) {
+    const items = getLocalStorage('so-cart')
+    //  const item = items.filter(i => i.Id === id)
+    console.log(items)
+    const newItems = items.filter(item => item.Id !== id)
+    setLocalStorage('so-cart', newItems)
+    window.location.reload()
+  }
+}
+
+getCartContents()
+const cartItems = getLocalStorage('so-cart')
+if (cartItems !== null) {
+  const listeners = document.querySelectorAll('.cart-card__delete')
+  const listenersArray = Array.from(listeners)
+  listenersArray.map(listener => listener.addEventListener('click', removeItem))
+}

@@ -21,12 +21,27 @@ export default class ProductDetails {
 
   async addToCart() {
     // Get the current items stores in localStorage
-    const localItems = getLocalStorage('so-cart')
+    let localItems = getLocalStorage('so-cart')
     // Check if there are already items there and add the new item
-    if (localItems === null) {
-      setLocalStorage('so-cart', [this.product])
+    if (localItems === null || localItems.length === 0) {
+      console.log('here in the first')
+      setLocalStorage('so-cart', [{ ...this.product, quantity: 1 }])
+      return
+    }
+    const addItemsArray = localItems.map(item =>
+      item.Id === this.product.Id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    )
+    let check = localItems.find(i => i.Id === this.product.Id)
+
+    if (check !== undefined) {
+      setLocalStorage('so-cart', addItemsArray)
     } else {
-      setLocalStorage('so-cart', [...localItems, this.product])
+      setLocalStorage('so-cart', [
+        ...localItems,
+        { ...this.product, quantity: 1 }
+      ])
     }
   }
 
@@ -42,7 +57,7 @@ export default class ProductDetails {
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
-          <button id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
+          <button class="btn-primary" id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
         </div>`
 
     document.querySelector('.product-detail').innerHTML = newProduct
