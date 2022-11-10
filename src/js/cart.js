@@ -24,8 +24,8 @@ function renderCartItem(item) {
    <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${item.Id}>delete</span></a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: <span class="qt-num">${item.quantity}</span></p>
-<button  data-id=${item.Id} class="cart-card__addQuantity btn-secondary">+</button>
-<button  data-id=${item.Id} class="cart-card__removeQuantity btn-secondary">-</button>
+<button data-id=${item.Id} class="cart-card__addQuantity btn-secondary">+</button>
+<button data-id=${item.Id} class="cart-card__removeQuantity btn-secondary">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`
   return newItem
