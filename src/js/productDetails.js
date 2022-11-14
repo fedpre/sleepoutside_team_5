@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from './utils'
+import { getLocalStorage, setLocalStorage, loadHeaderFooter } from './utils'
 
 export default class ProductDetails {
   constructor(productId, productData) {
@@ -66,3 +66,5 @@ export default class ProductDetails {
     ).innerHTML = `Sleep Outside | ${this.product.Name}`
   }
 }
+
+loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)

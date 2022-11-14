@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from './utils'
+import { getLocalStorage, loadHeaderFooter, setLocalStorage } from './utils'
 
 function getCartContents() {
   const cartItem = getLocalStorage('so-cart')
@@ -87,3 +87,5 @@ if (cartItems !== null) {
     listener.addEventListener('click', removeQuantity)
   )
 }
+
+loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)
