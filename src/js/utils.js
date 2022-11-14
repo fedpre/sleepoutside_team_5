@@ -27,3 +27,16 @@ export function getParams(param) {
   const urlParams = new URLSearchParams(queryString)
   return urlParams.get(param)
 }
+
+export function renderListWithTemplate(
+  templateElement,
+  parentElement,
+  list,
+  callback
+) {
+  list.map(product => {
+    const node = templateElement.content.cloneNode(true)
+    const childNode = callback(node, product)
+    parentElement.appendChild(childNode)
+  })
+}
