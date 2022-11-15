@@ -10,7 +10,6 @@ import { getLocalStorage, loadHeaderFooter } from './utils'
   const cartItems = getLocalStorage('so-cart')
   if (cartItems !== null) {
     const deleteListeners = document.querySelectorAll('.cart-card__delete')
-    console.log(deleteListeners)
     const deleteListenersArray = Array.from(deleteListeners)
     deleteListenersArray.map(listener =>
       listener.addEventListener('click', shoppingCart.removeItem)

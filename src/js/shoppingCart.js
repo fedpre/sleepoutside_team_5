@@ -51,7 +51,6 @@ export default class ShoppingCart {
 
   renderCartItems(itemList, selector, parentNode) {
     const templateElement = document.querySelector(selector)
-    console.log(templateElement)
     renderListWithTemplate(
       templateElement,
       parentNode,
@@ -63,7 +62,6 @@ export default class ShoppingCart {
   removeItem(e) {
     e.preventDefault()
     const id = e.target.dataset.id
-    console.log('here')
     if (getLocalStorage('so-cart') !== null) {
       const items = getLocalStorage('so-cart')
       const newItems = items.filter(item => item.Id !== id)
