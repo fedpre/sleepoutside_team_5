@@ -24,7 +24,6 @@ export default class ProductDetails {
     let localItems = getLocalStorage('so-cart')
     // Check if there are already items there and add the new item
     if (localItems === null || localItems.length === 0) {
-      console.log('here in the first')
       setLocalStorage('so-cart', [{ ...this.product, quantity: 1 }])
       return
     }
@@ -46,6 +45,10 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
+    const discount =
+      this.product.ListPrice != this.product.FinalPrice
+        ? `<p class="product-card__price"><strike>${this.product.ListPrice}</strike> ${this.product.FinalPrice}</p>`
+        : `<p class="product-card__price">${this.product.ListPrice}</p>`
     const newProduct = `<h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.Name}</h2>
         <img
@@ -53,7 +56,7 @@ export default class ProductDetails {
           src=${this.product.Image}
           alt=${this.product.Name}
         />
-        <p class="product-card__price">${this.product.ListPrice}</p>
+        <p class="product-card__price">${discount}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
