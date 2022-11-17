@@ -22,6 +22,8 @@ function getProductsData() {
 function renderProductPage() {
   const id = getLocalStorage('currPageId')
   const product = productsArray.find(item => item.Id === id)
+  const discount = product.ListPrice != product.FinalPrice ? `<p class="product-card__price"><strike>${product.ListPrice}</strike> ${product.FinalPrice}</p>`
+                   :`<p class="product-card__price">${product.ListPrice}</p>`;
   const newProduct = `<h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.Name}</h2>
         <img
@@ -30,7 +32,7 @@ function renderProductPage() {
           alt=${product.Name}
         />
 
-        <p class="product-card__price">${product.ListPrice}</p>
+        <p class="product-card__price">${discount}</p>
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">${product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
