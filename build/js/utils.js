@@ -1,15 +1,1 @@
-export function qs(e, t = document) {
-  return t.querySelector(e)
-}
-export function getLocalStorage(e) {
-  return JSON.parse(localStorage.getItem(e))
-}
-export function setLocalStorage(e, t) {
-  localStorage.setItem(e, JSON.stringify(t))
-}
-export function setClick(e, t) {
-  qs(e).addEventListener('touchend', n => {
-    n.preventDefault(), t()
-  }),
-    qs(e).addEventListener('click', t)
-}
+export function qs(e,t=document){return t.querySelector(e)}export function getLocalStorage(e){return JSON.parse(localStorage.getItem(e))}export function setLocalStorage(e,t){localStorage.setItem(e,JSON.stringify(t))}export function setClick(e,t){qs(e).addEventListener("touchend",n=>{n.preventDefault(),t()}),qs(e).addEventListener("click",t)}export function getParams(e){const t=window.location.search,n=new URLSearchParams(t);return n.get(e)}export function renderListWithTemplate(e,t,n,o){n.map(r=>{const c=e.content.cloneNode(!0),a=o(c,r);t.appendChild(a)})}

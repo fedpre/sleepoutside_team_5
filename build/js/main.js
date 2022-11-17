@@ -1,0 +1,1 @@
+import t from"./alert.js";import o from"./productData.js";import r from"./productList.js";const e=document.querySelector(".product-list"),c="#product-card-template",s=new o("tents"),n=new r("tents",s,e),a=new t;a.init(),n.init(c);
