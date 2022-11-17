@@ -229,6 +229,19 @@ header {
   color: red;
 }
 
+.prod-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  max-width: 600px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.prod-categories img {
+  max-width: 100px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
