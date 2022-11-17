@@ -40,3 +40,40 @@ export function renderListWithTemplate(
     parentElement.appendChild(childNode)
   })
 }
+
+export function renderWithTemplate(
+  templateElement, 
+  parentElement, 
+  homepage,
+  isHeader = false,
+  data, 
+  callback) {
+
+  let clone = templateElement.content.cloneNode(true);
+  if(callback) {
+    clone = callback(clone, data);
+  }
+  parent.appendChild(clone);
+
+}
+
+export async function loadTemplate(path) {
+  const html = await fetch(path).then(convertToText);
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template;
+}
+
+export async function loadHeaderFooter(
+  headerPath,
+  footerPath,
+  homepage){
+    const headerTemplate = await loadTemplate(headerPath)
+    const footerTemplate = await loadTemplate(footerPath)
+    const headerE1 = document.querySelector('header')
+    const footerE1 = document.querySelector('footer')
+
+    renderWithTemplate(headerTemplate, headerE1, homepage, true)
+    renderWithTemplate(footerTemplate, footerE1, homepage)
+}
+
