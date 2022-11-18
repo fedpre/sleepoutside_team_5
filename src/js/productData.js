@@ -1,3 +1,5 @@
+const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json()
@@ -6,22 +8,19 @@ function convertToJson(res) {
   }
 }
 
-export function filterProducts(productsArray, event) {}
+// export function filterProducts(productsArray, event) {}
 
 export default class ProductData {
-  constructor(category) {
-    this.category = category
-    this.path = `../json/${this.category}.json`
-  }
+  constructor() {}
 
-  getData() {
-    return fetch(this.path)
+  getData(category) {
+    return fetch(baseURL + `products/search/${category}`)
       .then(convertToJson)
-      .then(data => data)
+      .then(data => data.Result)
   }
 
-  async findProductById(productId) {
-    const products = await this.getData()
+  async findProductById(productId, category) {
+    const products = await this.getData(category)
     return products.find(item => item.Id === productId)
   }
 }

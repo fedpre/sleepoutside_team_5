@@ -32,11 +32,12 @@ export function renderListWithTemplate(
   templateElement,
   parentElement,
   list,
+  category = '',
   callback
 ) {
   list.map(product => {
     const node = templateElement.content.cloneNode(true)
-    const childNode = callback(node, product)
+    const childNode = callback(node, product, category)
     parentElement.appendChild(childNode)
   })
 }
