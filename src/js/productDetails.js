@@ -1,15 +1,19 @@
 import { getLocalStorage, setLocalStorage, loadHeaderFooter } from './utils'
 
 export default class ProductDetails {
-  constructor(productId, productData) {
+  constructor(productId, productData, category) {
     this.productId = productId
     this.product = {}
     this.productData = productData
+    this.category = category
   }
 
   async init() {
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-    this.product = await this.productData.findProductById(this.productId)
+    this.product = await this.productData.findProductById(
+      this.productId,
+      this.category
+    )
     // once we have the product details we can render out the HTML
     this.renderProductDetails()
     // once the HTML is rendered we can add a listener to Add to Cart button
@@ -53,7 +57,7 @@ export default class ProductDetails {
         <h2 class="divider">${this.product.Name}</h2>
         <img
           class="divider"
-          src=${this.product.Image}
+          src=${this.product.Images.PrimaryLarge}
           alt=${this.product.Name}
         />
         <p class="product-card__price">${discount}</p>
