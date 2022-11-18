@@ -1,17 +1,1 @@
-var o=Object.assign;import{getLocalStorage as n,setLocalStorage as d}from"./utils.js";function i(){const t=n("so-cart");if(t==null)return;const r=t.map(e=>u(e));document.querySelector(".product-list").innerHTML=r.join("")}function u(t){const r=`<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${t.Image}"
-      alt="${t.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${t.Name}</h2>
-  </a>
-   <a href="" class="cart-card__delete "><span class="material-symbols-outlined" data-id=${t.Id}>delete</span></a>
-  <p class="cart-card__color">${t.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: <span class="qt-num">${t.quantity}</span></p>
-<button data-id=${t.Id} class="cart-card__addQuantity btn-secondary">+</button>
-<button data-id=${t.Id} class="cart-card__removeQuantity btn-secondary">-</button>
-  <p class="cart-card__price">$${t.FinalPrice}</p>
-</li>`;return r}function m(t){t.preventDefault();const r=t.target.dataset.id;if(n("so-cart")!==null){const e=n("so-cart"),c=e.filter(a=>a.Id!==r);d("so-cart",c),window.location.reload()}}function y(t){const r=t.target.dataset.id,e=n("so-cart"),c=e.map(a=>a.Id===r?o(o({},a),{quantity:a.quantity+1}):a);d("so-cart",c),window.location.reload()}function _(t){const r=t.target.dataset.id,e=n("so-cart"),c=e.map(a=>a.Id===r?o(o({},a),{quantity:a.quantity-1}):a);d("so-cart",c),window.location.reload()}i();const p=n("so-cart");if(p!==null){const t=document.querySelectorAll(".cart-card__delete"),r=Array.from(t);r.map(s=>s.addEventListener("click",m));const e=document.querySelectorAll(".cart-card__addQuantity"),c=Array.from(e);c.map(s=>s.addEventListener("click",y));const a=document.querySelectorAll(".cart-card__removeQuantity"),l=Array.from(a);l.map(s=>s.addEventListener("click",_))}
+var m=(l,s,t)=>new Promise((r,c)=>{var i=e=>{try{a(t.next(e))}catch(o){c(o)}},d=e=>{try{a(t.throw(e))}catch(o){c(o)}},a=e=>e.done?r(e.value):Promise.resolve(e.value).then(i,d);a((t=t.apply(l,s)).next())});import u from"./shoppingCart.js";import{getLocalStorage as y,loadHeaderFooter as L}from"./utils.js";(function(){return m(this,null,function*(){const s=document.querySelector(".product-list"),t="#product-cart-template",r=new u(s);yield r.init(t);const c=y("so-cart");if(c!==null){const i=document.querySelectorAll(".cart-card__delete"),d=Array.from(i);d.map(n=>n.addEventListener("click",r.removeItem));const a=document.querySelectorAll(".cart-card__addQuantity"),e=Array.from(a);e.map(n=>n.addEventListener("click",r.addQuantity));const o=document.querySelectorAll(".cart-card__removeQuantity"),p=Array.from(o);p.map(n=>n.addEventListener("click",r.removeQuantity))}})})(),L("../partials/header.html","../partials/footer.html",!1);
