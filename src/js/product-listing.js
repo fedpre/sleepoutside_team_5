@@ -2,7 +2,7 @@ import ProductData from './productData'
 import ProductList from './productList'
 import { loadHeaderFooter, getParams } from './utils'
 
-loadHeaderFooter('./partials/header.html', './partials/footer.html', false)
+loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)
 
 const category = getParams('category')
 let title = document.querySelector('#product-type')

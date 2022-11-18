@@ -27,7 +27,7 @@ export default class ShoppingCart {
     const finalNode = node
 
     const itemImg = finalNode.querySelector('.prod-img')
-    itemImg.src = item.Image
+    itemImg.src = item.Images.PrimaryMedium
     item.alt = item.Name
     const titleName = finalNode.querySelector('.card__name')
     titleName.innerHTML = item.Name
@@ -51,10 +51,12 @@ export default class ShoppingCart {
 
   renderCartItems(itemList, selector, parentNode) {
     const templateElement = document.querySelector(selector)
+    let category
     renderListWithTemplate(
       templateElement,
       parentNode,
       itemList,
+      category,
       this.prepareTemplate
     )
   }

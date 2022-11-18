@@ -242,6 +242,15 @@ header {
   max-width: 100px;
 }
 
+.pc-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.pc-item a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
