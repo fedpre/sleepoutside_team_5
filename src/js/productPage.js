@@ -38,7 +38,8 @@ function renderProductPage() {
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">${product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
-          <button id="addToCart" data-id=${product.Id}>Add to Cart</button>
+          <button id="addToCart" data-id=${product.Id}>Add to Cart
+          <span class="cart-item"></span></button>
         </div>`
 
   document.querySelector('.product-detail').innerHTML = newProduct
