@@ -1,34 +1,41 @@
 import { renderListWithTemplate } from './utils'
 export default class ProductList {
-  constructor(category, productData, listElement) {
+  constructor(category, productData, listElement, sortKey) {
     this.category = category
     this.productData = productData
     this.listElement = listElement
     this.products = {}
-    // this.acceptedItems = ['880RR', '985RF', '985PR', '344YJ']
+    this.sortKey = ''
   }
-  async init(selector) {
-    // this.products = await this.getAllProducts(item =>
-    //   this.acceptedItems.includes(item.Id)
-    // )
+  async init(selector, sortKey) {
+    this.sortKey = sortKey
     this.products = await this.productData.getData(this.category)
+    this.sortList(this.sortKey)
+    console.log(sortKey)
     this.renderList(this.products, selector, this.listElement, this.category)
   }
 
-  // async getAllProducts(filterCallback = null) {
-  // if (filterCallback !== null) {
-  //   const products = await this.productData.getData(
-  //     this.category,
-  //    filterCallback
-  //   )
-  //   return this.filterProducts(products, filterCallback)
-  //  }
-  // const list = await this.productData.getData(this.category)
-  // return list
-  // }
-
   async filterProducts(list, filter) {
     return list.filter(item => filter(item))
+  }
+
+  sortList(sortKey) {
+    switch (sortKey) {
+      case 'name':
+        this.products.sort((a, b) =>
+          a.NameWithoutBrand.localeCompare(b.NameWithoutBrand)
+        )
+        break
+      case 'price':
+        this.products.sort((a, b) => {
+          if (a.ListPrice >= b.ListPrice) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+        break
+    }
   }
 
   prepareTemplate(node, product, category) {
