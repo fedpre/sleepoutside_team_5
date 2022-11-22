@@ -10,7 +10,7 @@ function convertToJson(res) {
 
 // export function filterProducts(productsArray, event) {}
 
-export default class ProductData {
+export default class ExternalServices {
   constructor() {}
 
   getData(category) {

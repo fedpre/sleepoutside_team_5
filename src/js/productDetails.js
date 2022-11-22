@@ -1,16 +1,16 @@
 import { getLocalStorage, setLocalStorage, loadHeaderFooter } from './utils'
 
 export default class ProductDetails {
-  constructor(productId, productData, category) {
+  constructor(productId, ExternalServices, category) {
     this.productId = productId
     this.product = {}
-    this.productData = productData
+    this.ExternalServices = ExternalServices
     this.category = category
   }
 
   async init() {
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-    this.product = await this.productData.findProductById(
+    this.product = await this.ExternalServices.findProductById(
       this.productId,
       this.category
     )
