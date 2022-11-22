@@ -4,7 +4,7 @@ export default class ProductList {
   constructor(category, productData, listElement) {
 
     this.category = category
-    this.ExternalServices = ExternalServices
+    this.ExternalServices = productData
     this.listElement = listElement
     this.products = {}
     this.sortKey = ''
