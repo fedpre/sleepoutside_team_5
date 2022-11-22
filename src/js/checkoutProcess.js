@@ -39,7 +39,6 @@ export default class CheckoutProcess {
   calculateItemSummary() {
     // calculate and display the total amount of the items in the cart, and the number of items.
     this.itemCount = this.list.reduce((acc, curr) => acc + curr.quantity, 0)
-    console.log(this.list)
     this.itemTotal =
       Math.round(
         this.list.reduce(
