@@ -1,17 +1,23 @@
 import { renderListWithTemplate } from './utils'
+
 export default class ProductList {
-  constructor(category, ExternalServices, listElement, sortKey) {
+  constructor(category, productData, listElement) {
+
     this.category = category
     this.ExternalServices = ExternalServices
     this.listElement = listElement
     this.products = {}
     this.sortKey = ''
+    this.selector = ''
   }
   async init(selector, sortKey) {
     this.sortKey = sortKey
+
     this.products = await this.ExternalServices.getData(this.category)
+
+    this.selector = selector
+
     this.sortList(this.sortKey)
-    console.log(sortKey)
     this.renderList(this.products, selector, this.listElement, this.category)
   }
 
@@ -64,5 +70,10 @@ export default class ProductList {
       category,
       this.prepareTemplate
     )
+  }
+
+  searchProduct(key) {
+    const products = this.products.filter(item => item.Name.toLowerCase().includes(key.toLowerCase()))
+    this.renderList(products, this.selector, this.listElement, this.category)
   }
 }
