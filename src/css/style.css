@@ -271,6 +271,14 @@ header {
   padding: 5px 10px;
 }
 
+.listing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: .5em .5em 0 .5em;
+
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

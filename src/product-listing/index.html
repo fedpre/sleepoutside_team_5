@@ -23,14 +23,24 @@
   </head>
   <body>
     <header class="divider"></header>
-    <div class="sort-input">
-      <label for="sort"
-        >Sort items by:
-        <select name="sort" id="sort">
-          <option value="name" selected>Name</option>
-          <option value="price">Price</option>
-        </select>
-      </label>
+    <div class="listing-nav">
+      <div class="sort-input">
+        <label for="sort"
+          >Sort items by:
+          <select name="sort" id="sort">
+            <option value="name" selected>Name</option>
+            <option value="price">Price</option>
+          </select>
+        </label>
+      </div>
+      <div class="prod-search">
+        <form class="search-form" id="search-form">
+          <input type="text" name='query' id='query'/>
+          <button type="submit" class="submit-btn">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
+        </form>
+      </div>
     </div>
     <main class="divider">
       <section class="products">
