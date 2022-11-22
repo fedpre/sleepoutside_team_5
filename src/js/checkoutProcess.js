@@ -14,11 +14,11 @@ function packageItems(items) {
 }
 
 function convertFD2JSON(formData) {
-	let obj = {}
-	for (let key of formData.keys()) {
-	obj[key] = formData.get(key);
-	}
-	return JSON.stringify(obj);
+  let obj = {}
+  for (let key of formData.keys()) {
+    obj[key] = formData.get(key)
+  }
+  return JSON.stringify(obj)
 }
 
 export default class CheckoutProcess {
@@ -39,16 +39,20 @@ export default class CheckoutProcess {
   calculateItemSummary() {
     // calculate and display the total amount of the items in the cart, and the number of items.
     this.itemCount = this.list.reduce((acc, curr) => acc + curr.quantity, 0)
+    console.log(this.list)
     this.itemTotal =
       Math.round(
-        this.list.reduce((acc, curr) => acc + curr.ListPrice, 0) * 100
+        this.list.reduce(
+          (acc, curr) => acc + curr.ListPrice * curr.quantity,
+          0
+        ) * 100
       ) / 100
     this.outputSelector.querySelector(
       '.item-subtotal'
     ).innerText = this.itemCount
     this.outputSelector.querySelector(
       '.subtotal-value'
-    ).innerText = this.itemTotal
+    ).innerText = `$${this.itemTotal}`
   }
   calculateOrderTotal() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
@@ -99,5 +103,6 @@ export default class CheckoutProcess {
     // call the checkout method in our ExternalServices module and send it our data object.
     const jsonData = convertFD2JSON(fd)
     const res = await externalServices.checkout(jsonData)
+    console.log(res.status)
   }
 }
