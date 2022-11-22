@@ -3,8 +3,7 @@ import CheckoutProcess from './checkoutProcess.js'
 
 
 const subtotalNode = document.querySelector('.subtotal-info')
-
-console.log(subtotalNode.querySelector('.tax-amount'))
+const formNode = document.querySelector('#ck-form')
 
 const checkoutProcess = new CheckoutProcess('so-cart', subtotalNode)
 
@@ -15,5 +14,8 @@ zip.addEventListener('input', () => {
   checkoutProcess.calculateOrderTotal()
 })
 
+formNode.addEventListener('submit', async(event) => {
+  await checkoutProcess.checkout(formNode, event)
+})
 
 loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)
