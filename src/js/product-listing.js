@@ -1,4 +1,4 @@
-import ProductData from './productData'
+import ExternalServices from './ExternalServices'
 import ProductList from './productList'
 import { loadHeaderFooter, getParams } from './utils'
 
@@ -13,8 +13,8 @@ title.innerHTML = title.textContent + ` ${category}`
 const parentNode = document.querySelector('.product-list')
 const selector = '#product-card-template'
 let sortKey = document.querySelector('#sort').value
-const productData = new ProductData()
-const productList = new ProductList(category, productData, parentNode)
+const externalServices = new ExternalServices()
+const productList = new ProductList(category, externalServices, parentNode)
 productList.init(selector, sortKey)
 
 document.querySelector('#sort').addEventListener('change', e => {

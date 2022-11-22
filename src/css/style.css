@@ -282,8 +282,48 @@ header {
 .cart-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 2em;
   max-width: 600px;
 
+}
+
+.cart-footer a {
+  text-decoration: none;
+  color: black;
+  background-color: var(--primary-color);
+  padding: 0.7em 1.5em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+
+.cart-footer a:hover {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.checkout-form-section {
+  margin: 0 2em;
+}
+
+.checkout-form {
+  max-width: 400px;
+  margin-bottom: 2em;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-field input {
+  padding: 0.5em;
+}
+
+.subtotal-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media screen and (min-width: 500px) {
