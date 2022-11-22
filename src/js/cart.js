@@ -1,11 +1,11 @@
 import ShoppingCart from './shoppingCart'
 import { getLocalStorage, loadHeaderFooter } from './utils'
-
-(async function main() {
+;(async function main() {
   const parentNode = document.querySelector('.product-list')
   const selector = '#product-cart-template'
+  const totalEl = document.querySelector('.cart-total')
   const shoppingCart = new ShoppingCart(parentNode)
-  await shoppingCart.init(selector)
+  await shoppingCart.init(selector, totalEl)
 
   const cartItems = getLocalStorage('so-cart')
   if (cartItems !== null) {

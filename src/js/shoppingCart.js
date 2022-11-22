@@ -8,10 +8,12 @@ export default class ShoppingCart {
   constructor(listElement) {
     this.cartList = []
     this.listElement = listElement
+    this.cartTotalValue = 0
   }
 
-  async init(selector) {
+  async init(selector, totalEl) {
     this.cartList = await this.getCartContent()
+    this.cartTotalValue = this.cartTotal(totalEl)
     this.renderCartItems(this.cartList, selector, this.listElement)
   }
 
@@ -21,6 +23,24 @@ export default class ShoppingCart {
       return []
     }
     return cartList
+  }
+
+  cartTotal(totalEl) {
+    if (this.cartList.length === 0) {
+      totalEl.innerText = totalEl.innerText + ' $0'
+      return 0
+    } else {
+      totalEl.innerText =
+        totalEl.innerText +
+        ` $${
+          Math.round(
+            this.cartList.reduce(
+              (acc, curr) => acc + curr.ListPrice * curr.quantity,
+              0
+            ) * 100
+          ) / 100
+        }`
+    }
   }
 
   prepareTemplate(node, item) {
@@ -44,7 +64,7 @@ export default class ShoppingCart {
     )
     removeQuantityBtn.setAttribute('data-id', item.Id)
     const finalPrice = finalNode.querySelector('.cart-card__price')
-    finalPrice.innerHTML = item.FinalPrice
+    finalPrice.innerHTML = `$${item.FinalPrice}`
 
     return finalNode
   }
