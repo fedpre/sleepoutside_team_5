@@ -1,5 +1,5 @@
 import ExternalServices from './ExternalServices'
-import { getLocalStorage } from './utils'
+import { getLocalStorage, alertMessage } from './utils'
 
 const externalServices = new ExternalServices()
 
@@ -39,7 +39,6 @@ export default class CheckoutProcess {
   calculateItemSummary() {
     // calculate and display the total amount of the items in the cart, and the number of items.
     this.itemCount = this.list.reduce((acc, curr) => acc + curr.quantity, 0)
-    console.log(this.list)
     this.itemTotal =
       Math.round(
         this.list.reduce(
@@ -102,7 +101,13 @@ export default class CheckoutProcess {
 
     // call the checkout method in our ExternalServices module and send it our data object.
     const jsonData = convertFD2JSON(fd)
-    const res = await externalServices.checkout(jsonData)
-    console.log(res.status)
+    try {
+      const res = await externalServices.checkout(jsonData)
+      localStorage.clear()
+      window.location.href = './checkedout.html'
+    } catch (err) {
+      console.error(err)
+      alertMessage(err.message)
+    }
   }
 }

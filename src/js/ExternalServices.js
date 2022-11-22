@@ -1,11 +1,12 @@
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'
 const postOrderURL = 'http://server-nodejs.cit.byui.edu:3000/checkout'
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const jsonRes = await res.json()
   if (res.ok) {
-    return res.json()
+    return jsonRes
   } else {
-    throw new Error('Bad Response')
+    throw { name: 'serviceError', message: jsonRes }
   }
 }
 
@@ -31,8 +32,9 @@ export default class ExternalServices {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      },
+      }
     })
-    return await fetch(req) 
+    let res = await fetch(req)
+    return convertToJson(res)
   }
 }
