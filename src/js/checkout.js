@@ -1,17 +1,19 @@
 import { loadHeaderFooter } from './utils'
-import { calculateSubtotal, calculateOrderTotal } from './checkoutProcess.js'
+import CheckoutProcess from './checkoutProcess.js'
 
-const subtotalCount = document.querySelector('.item-subtotal')
-const subtotalAmount = document.querySelector('.subtotal-value')
-const shippingAmount = document.querySelector('.shipping-amount')
-const taxAmount = document.querySelector('.tax-amount')
-const orderTotal = document.querySelector('.order-total')
+
+const subtotalNode = document.querySelector('.subtotal-info')
+
+console.log(subtotalNode.querySelector('.tax-amount'))
+
+const checkoutProcess = new CheckoutProcess('so-cart', subtotalNode)
+
+checkoutProcess.init()
+
 const zip = document.querySelector('#zip')
-
 zip.addEventListener('input', () => {
-  calculateOrderTotal(shippingAmount, taxAmount, orderTotal)
+  checkoutProcess.calculateOrderTotal()
 })
 
-calculateSubtotal(subtotalCount, subtotalAmount)
 
 loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)
