@@ -24,6 +24,7 @@
                 name="fname"
                 id="fname"
                 placeholder="John"
+                required
               />
             </div>
             <div class="input-field">
@@ -33,6 +34,7 @@
                 name="lname"
                 id="lname"
                 placeholder="Doe"
+                required
               />
             </div>
             <div class="input-field">
@@ -42,6 +44,7 @@
                 name="street"
                 id="street"
                 placeholder="34N 500S Monroe rd"
+                required
               />
             </div>
             <div class="input-field">
@@ -51,15 +54,28 @@
                 name="city"
                 id="city"
                 placeholder="Spanish Fork"
+                required
               />
             </div>
             <div class="input-field">
               <label>State</label>
-              <input type="text" name="state" id="state" placeholder="Utah" />
+              <input
+                type="text"
+                name="state"
+                id="state"
+                placeholder="Utah"
+                required
+              />
             </div>
             <div class="input-field">
               <label>Zip</label>
-              <input type="text" name="zip" id="zip" placeholder="84587" />
+              <input
+                type="number"
+                name="zip"
+                id="zip"
+                placeholder="84587"
+                required
+              />
             </div>
           </fieldset>
           <fieldset>
@@ -71,6 +87,7 @@
                 name="cardNumber"
                 id="creditCard"
                 placeholder="5432876534569876"
+                required
               />
             </div>
             <div class="input-field">
@@ -80,11 +97,18 @@
                 name="expiration"
                 id="expiration"
                 placeholder="03/26"
+                required
               />
             </div>
             <div class="input-field">
               <label>Security Code</label>
-              <input type="password" name="code" id="ccv" placeholder="302" />
+              <input
+                type="password"
+                name="code"
+                id="ccv"
+                placeholder="302"
+                required
+              />
             </div>
           </fieldset>
           <fieldset>
@@ -112,6 +136,6 @@
         </form>
       </section>
     </main>
-    <footer>&copy;NOT a real business</footer>
+    <footer></footer>
   </body>
 </html>
