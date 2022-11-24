@@ -1,6 +1,6 @@
 import ExternalServices from './ExternalServices'
 import ProductList from './productList'
-import { loadHeaderFooter, getParams } from './utils'
+import { loadHeaderFooter, getParams, createBreadcrumb } from './utils'
 
 loadHeaderFooter('../partials/header.html', '../partials/footer.html', false)
 
@@ -15,13 +15,15 @@ const selector = '#product-card-template'
 let sortKey = document.querySelector('#sort').value
 const externalServices = new ExternalServices()
 const productList = new ProductList(category, externalServices, parentNode)
-productList.init(selector, sortKey)
+productList.init(selector, sortKey).then(() => {
+  const parentNodeBreadcrumb = document.querySelector('.breadcrumb')
+  createBreadcrumb(category, productList.countItems(), parentNodeBreadcrumb)
+})
 
 document.querySelector('#sort').addEventListener('change', e => {
   sortKey = e.target.value
   productList.init(selector, sortKey)
 })
-
 
 document.querySelector('.search-form').addEventListener('submit', e => {
   e.preventDefault()

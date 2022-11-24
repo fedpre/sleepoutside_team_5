@@ -22,6 +22,9 @@ export default class ProductDetails {
       .getElementById('addToCart')
       .addEventListener('click', this.addToCart.bind(this))
   }
+  getName() {
+    return this.product.Name
+  }
 
   async addToCart() {
     // Get the current items stores in localStorage
