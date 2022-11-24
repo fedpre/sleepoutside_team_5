@@ -21,6 +21,9 @@ export default class ProductList {
   async filterProducts(list, filter) {
     return list.filter(item => filter(item))
   }
+  countItems() {
+    return this.products.length
+  }
 
   sortList(sortKey) {
     switch (sortKey) {

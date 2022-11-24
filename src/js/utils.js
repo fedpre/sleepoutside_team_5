@@ -111,3 +111,12 @@ export function alertMessage(message, scroll = true) {
   //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
   if (scroll) window.scrollTo(0, 0)
 }
+
+export function createBreadcrumb(category, noItems = 0, parentNode) {
+  const prodCatNode = document.createElement('span')
+  prodCatNode.innerText = `${category} >> `
+  parentNode.appendChild(prodCatNode)
+  const noItemsNode = document.createElement('span')
+  noItemsNode.innerText = `(${noItems} items)`
+  parentNode.appendChild(noItemsNode)
+}
