@@ -1,5 +1,7 @@
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'
 const postOrderURL = 'http://server-nodejs.cit.byui.edu:3000/checkout'
+const loginURL = 'http://server-nodejs.cit.byui.edu:3000/login'
+const orderURL = 'http://server-nodejs.cit.byui.edu:3000/orders'
 
 async function convertToJson(res) {
   const jsonRes = await res.json()
@@ -37,4 +39,29 @@ export default class ExternalServices {
     let res = await fetch(req)
     return convertToJson(res)
   }
+ 
+  async loginRequest(creds) {
+    let req = new Request(loginURL, {
+      body: JSON.stringify(creds),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const res = await fetch(req)
+    return convertToJson(res)
+  }
+
+  async getOrders(authToken) {
+    let req = new Request(orderURL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    const res = await fetch(req)
+    return convertToJson(res)
+  }
+
 }

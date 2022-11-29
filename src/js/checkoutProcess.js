@@ -106,7 +106,6 @@ export default class CheckoutProcess {
       localStorage.clear()
       window.location.href = './checkedout.html'
     } catch (err) {
-      console.error(err)
       alertMessage(err.message)
     }
   }
