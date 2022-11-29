@@ -335,6 +335,10 @@ header {
   padding: 1em 0.6em;
 }
 
+.login-container { 
+  margin: 2em;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
