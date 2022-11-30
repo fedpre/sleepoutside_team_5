@@ -124,24 +124,24 @@ header {
 .cart svg {
   width: 25px;
 }
-.cart svg:before {
+.cart::before {
   content:attr(data-totalitems);
   font-size:12px;
   font-weight:600;
   position: absolute;
-  top:-12px;
+  top:26px;
   right:-12px;
   background: #2bd156;
   color:white;
   line-height: 24px;
   padding: 0 5px;
   height:24px;
-  min-width: 24px;
+  min-width: 10px;
   text-align: center;
   border-radius: 24px;
 }
-.cart svg.shake {
-  animation: shakeCart .4s ease-in-out forwards;
+.shake {
+  animation: shakeCart .2s ease-in-out forwards;
 }
 @keyframes xAxis {
   100% {
@@ -170,14 +170,13 @@ header {
 .cart:hover svg {
   fill: gray;
 }
-.cart-item{
+/* .cart-item{
   position: absolute;
   height:24px;
   width: 24px;
-  top: -10px;
-  right: -10px;
+  padding: 0 0 10px 10px;
 }
-.cart-item:before{
+.cart-item::before{
   content:'1';
   display: block;
   line-height: 24px;
@@ -189,14 +188,14 @@ header {
   color:white;
   border-radius: 20px;
   text-align: center;
-}
-.cart-item.sendtocart{
+} */
+/* .sendtocart{
   display:block;
   animation: xAxis 1s forwards cubic-bezier(1.000,0.440,0.840,0.165);
 }
-.cart-item.sendtocart:before{
+.cart-item.sendtocart::before{
   animation: yAxis 1s alternate forwards cubic-bezier(0.165,0.840,0.440,1.00);
-}
+} */ 
 /* End cart icon styles */
 
 .mission {
@@ -318,6 +317,12 @@ header {
 
 .pc-item a:hover {
   text-decoration: underline;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 400px;
 }
 
 @media screen and (min-width: 500px) {
