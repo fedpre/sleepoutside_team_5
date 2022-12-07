@@ -21,7 +21,7 @@ export default class ProductDetails {
     document
       .getElementById('addToCart')
       .addEventListener('click', this.addToCart.bind(this))
-      // console.log(this.product);
+      console.log(this.product);
     }
   getName() {
     return this.product.Name
@@ -53,8 +53,17 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    let newProductA = `<h3>${this.product.Brand.Name}</h3>
+    let newProduct = `<h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.Name}</h2>
+        <div class="image-carousel">`
+    if (this.product.Images.ExtraImages) {
+      this.product.Images.ExtraImages.map(extra => {
+        newProduct += `<img class="alt-img" src="${extra.Src}" alt="${extra.Title}"/> `
+      })
+    }
+    
+    newProduct += `
+        </div>
         <img
           class="divider prodImg"
           src=${this.product.Images.PrimaryLarge}
@@ -63,16 +72,17 @@ export default class ProductDetails {
         <p class="product-card__price">$${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <div class="product__colorPicker">`
+    if (this.product.Colors) {
+      this.product.Colors.map(color => {
+        newProduct += `<img class="color-picker-img" src="${color.ColorPreviewImageSrc}" data-name="${color.ColorName}" />`
+      })
+    }
 
-    this.product.Colors.map(color => {
-      newProductA += `<img class="color-picker-img" src="${color.ColorPreviewImageSrc}" data-name="${color.ColorName}" />`
-    })
-
-    const newProductB = `</div><p class="product__description">${this.product.DescriptionHtmlSimple}</p>
+    newProduct += `</div><p class="product__description">${this.product.DescriptionHtmlSimple}</p>
                           <div class="product-detail__add">
                           <button class="btn-primary" id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
                           </div>`
-    document.querySelector('.product-detail').innerHTML = newProductA + newProductB
+    document.querySelector('.product-detail').innerHTML = newProduct
     document.querySelector(
       'title'
     ).innerHTML = `Sleep Outside | ${this.product.Name}`
@@ -84,6 +94,14 @@ export default class ProductDetails {
         lgImage.src = el.src
         const colorName = document.querySelector('.product__color')
         colorName.innerHTML = el.dataset.name
+      })
+    })
+
+    const altImages = document.querySelectorAll('.alt-img')
+    altImages.forEach(img => {
+      img.addEventListener('click', () => {
+        const lgImage = document.querySelector('.prodImg')
+        lgImage.src = img.src
       })
     })
   }
