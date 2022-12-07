@@ -338,6 +338,24 @@ header {
 .login-container { 
   margin: 2em;
 }
+footer {
+  font-size: var(--small-font);
+  padding: 1em;
+}
+
+.product__colorPicker {
+  display: flex;
+  width: 60px;
+}
+
+.color-picker-img {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  margin: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 @media screen and (min-width: 500px) {
   body {
@@ -353,7 +371,4 @@ header {
   }
 }
 
-footer {
-  font-size: var(--small-font);
-  padding: 1em;
-}
+
