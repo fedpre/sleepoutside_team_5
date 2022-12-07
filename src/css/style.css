@@ -357,6 +357,20 @@ footer {
   cursor: pointer;
 }
 
+.image-carousel {
+  display: flex;
+  width: 100px;
+  justify-content: space-around;
+  max-width: 500px;
+}
+
+.alt-img {
+  margin: 0 25px;
+  cursor: pointer;
+}
+
+
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
