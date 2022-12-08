@@ -1,6 +1,7 @@
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'
 const postOrderURL = 'http://server-nodejs.cit.byui.edu:3000/checkout'
 const loginURL = 'http://server-nodejs.cit.byui.edu:3000/login'
+const registerURL = 'http://server-nodejs.cit.byui.edu:3000/users'
 const orderURL = 'http://server-nodejs.cit.byui.edu:3000/orders'
 
 async function convertToJson(res) {
@@ -17,10 +18,10 @@ async function convertToJson(res) {
 export default class ExternalServices {
   constructor() {}
 
-  getData(category) {
-    return fetch(baseURL + `products/search/${category}`)
-      .then(convertToJson)
-      .then(data => data.Result)
+  async getData(category) {
+    const res = await fetch(baseURL + `products/search/${category}`)
+    const data = await convertToJson(res)
+    return data.Result
   }
 
   async findProductById(productId, category) {
@@ -43,6 +44,18 @@ export default class ExternalServices {
   async loginRequest(creds) {
     let req = new Request(loginURL, {
       body: JSON.stringify(creds),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const res = await fetch(req)
+    return convertToJson(res)
+  }
+
+  async registerRequest(data) {
+    let req = new Request(registerURL, {
+      body: JSON.stringify(data),
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
