@@ -1,6 +1,6 @@
 import ShoppingCart from './shoppingCart'
 import { getLocalStorage, loadHeaderFooter } from './utils'
-;(async function main() {
+(async function main() {
   const parentNode = document.querySelector('.product-list')
   const selector = '#product-cart-template'
   const totalEl = document.querySelector('.cart-total')
