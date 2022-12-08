@@ -21,7 +21,11 @@ export default class ProductDetails {
     document
       .getElementById('addToCart')
       .addEventListener('click', this.addToCart.bind(this))
-      console.log(this.product);
+    document
+      .getElementById('addToWishlist')
+      .addEventListener('click', this.addToWishlist.bind(this))
+
+    console.log(this.product);
     }
   getName() {
     return this.product.Name
@@ -48,6 +52,31 @@ export default class ProductDetails {
       setLocalStorage('so-cart', [
         ...localItems,
         { ...this.product, quantity: 1 }
+      ])
+    }
+  }
+
+  async addToWishlist() {
+    // Get the current items stores in localStorage
+    let localItems = getLocalStorage('so-wishlist')
+    // Check if there are already items there and add the new item
+    if (localItems === null || localItems.length === 0) {
+      setLocalStorage('so-wishlist', [this.product])
+      return
+    }
+    // const addItemsArray = localItems.map(item =>
+    //   item.Id === this.product.Id
+    //     ? { ...item, quantity: item.quantity + 1 }
+    //     : item
+    // )
+    let check = localItems.find(i => i.Id === this.product.Id)
+
+    if (check !== undefined) {
+      setLocalStorage('so-wishlist', localItems)
+    } else {
+      setLocalStorage('so-wishlist', [
+        ...localItems,
+        { ...this.product }
       ])
     }
   }
@@ -79,8 +108,9 @@ export default class ProductDetails {
     }
 
     newProduct += `</div><p class="product__description">${this.product.DescriptionHtmlSimple}</p>
-                          <div class="product-detail__add">
+                          <div class="product-detail__add add">
                           <button class="btn-primary" id="addToCart" data-id=${this.product.Id}>Add to Cart</button>
+                          <button class="btn-primary-red" id="addToWishlist" data-id=${this.product.Id}>Add to Wishlist</button>
                           </div>`
     document.querySelector('.product-detail').innerHTML = newProduct
     document.querySelector(

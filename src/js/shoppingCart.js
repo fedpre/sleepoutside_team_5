@@ -25,6 +25,14 @@ export default class ShoppingCart {
     return cartList
   }
 
+  getWishListContent() {
+    const cartList = getLocalStorage('so-wishlist')
+    if (cartList == null) {
+      return []
+    }
+    return cartList
+  }
+
   cartTotal(totalEl) {
     if (this.cartList.length === 0) {
       totalEl.innerText = totalEl.innerText + ' $0'

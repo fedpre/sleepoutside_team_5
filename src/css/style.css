@@ -98,6 +98,21 @@ header {
 .btn-primary:active {
   transform: scale(0.97);
 }
+.btn-primary-red {
+  padding: 0.5em 2em;
+  background-color: rgb(179, 19, 19);
+  color: white;
+  margin: auto;
+  display: block;
+  border: 0;
+  font-size: var(--large-font);
+}
+.btn-primary-red:hover {
+  background-color: rgb(141, 17, 17);
+}
+.btn-primary-red:active {
+  transform: scale(0.97);
+}
 
 .btn-secondary {
   border: 0;
@@ -406,6 +421,9 @@ footer {
 
 .account-container a:hover {
   box-shadow: 2px 2px 8px #30303047;
+}
+.add {
+  display: flex;
 }
 
 @media screen and (min-width: 500px) {
