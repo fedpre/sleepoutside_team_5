@@ -24,8 +24,6 @@ export default class ProductDetails {
     document
       .getElementById('addToWishlist')
       .addEventListener('click', this.addToWishlist.bind(this))
-
-    console.log(this.product);
     }
   getName() {
     return this.product.Name
@@ -61,7 +59,7 @@ export default class ProductDetails {
     let localItems = getLocalStorage('so-wishlist')
     // Check if there are already items there and add the new item
     if (localItems === null || localItems.length === 0) {
-      setLocalStorage('so-wishlist', [this.product])
+      setLocalStorage('so-wishlist', [{...this.product, category: this.category}])
       return
     }
     // const addItemsArray = localItems.map(item =>
@@ -76,7 +74,7 @@ export default class ProductDetails {
     } else {
       setLocalStorage('so-wishlist', [
         ...localItems,
-        { ...this.product }
+        { ...this.product, category: this.category }
       ])
     }
   }

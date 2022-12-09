@@ -27,6 +27,12 @@ export default class WishlistData {
   prepareTemplate(node, item) {
     const finalNode = node
 
+    const aTitle = finalNode.querySelector('.title-link-wishlist')
+    const aImg = finalNode.querySelector('.cart-card__image')
+
+    aTitle.href = aTitle.href + item.Id + `&category=${item.category}`
+    aImg.href = aTitle.href + item.Id + `&category=${item.category}`
+
     const itemImg = finalNode.querySelector('.prod-img')
     itemImg.src = item.Images.PrimaryMedium
     item.alt = item.Name
